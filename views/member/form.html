@@ -1,0 +1,39 @@
+{% extends '../outline/layout/main.html' %}
+{% block content %}
+<h1>회원 가입</h1>
+<form method="POST" action="member/join" target="ifrmHidden">
+<dl>
+    <dt>아이디</dt>
+    <dd>
+        <input type="text" name="memId">
+    </dd>
+</dl>
+<dl>
+    <dt>회원명</dt>
+    <dd>
+        <input type="text" name="memNm">
+    </dd>
+</dl>
+<dl>
+    <dt>비밀번호</dt>
+    <dd>
+        <input type="text" name="memPw">
+    </dd>
+</dl>
+<dl>
+    <dt>비밀번호확인</dt>
+    <dd>
+        <input type="text" name="memPwRe">
+    </dd>
+</dl>
+<dl>
+    <dt>휴대전화번호</dt>
+    <dd>
+        <input type="text" name="cellPhone">
+    </dd>
+</dl>
+<input type="reset" value="취소하기">
+<input type="submit" value="가입하기">
+</form>
+
+{% endblock %}
