@@ -75,7 +75,7 @@ const member = {
         }
 
         /** 5.휴대전화 번호 db처리 통일성을 위해 숫자로만 변경 */
-        req.body.cellphone = cellPhone;
+        req.body.cellPhone = cellPhone;
       }
 
       /** 6. 중복 가입 여부 (이미 가입된 회원인 경우 -> 회원 가입 불가) */
@@ -117,7 +117,8 @@ const member = {
    * 비회원 전용 접속 권한 체크
    */
   guestOnly(req, res, next) {
-    if(req.isLogin) { // 로그인 상태이면 접속 불가 처리
+    if (req.isLogin) {
+      // 로그인 상태이면 접속 불가 처리
       return alert("비회원 전용 페이지 입니다.", res, -1);
     }
 
@@ -127,11 +128,12 @@ const member = {
    * 관리자 전용 접속 권한 체크
    */
   adminOnly(req, res, next) {
-    if(!req.isLogin || !req.member.isAdmin) { // 비회원이거나 관리자가 아닌 회원인 경우
-      return alert("접속 권한이 없습니다.",res, -1);
+    if (!req.isLogin || !req.member.isAdmin) {
+      // 비회원이거나 관리자가 아닌 회원인 경우
+      return alert("접속 권한이 없습니다.", res, -1);
     }
     next();
-  }
+  },
 };
 
 module.exports = member;

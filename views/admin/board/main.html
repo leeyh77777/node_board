@@ -1,0 +1,57 @@
+{% extends '../../outline/layout/admin.html' %}
+{% block content %}
+<div class='main_title'>게시판 등록</div>
+<form method="POST" action="/admin/board" target="ifrmHidden" autocomplete='off'>
+    <dl class="dl_cell">
+        <dt>게시판 아이디</dt>
+        <dd>
+            <input type="text" name="boardId">
+        </dd>
+        <dt>게시판 명</dt>
+        <dd>
+            <input type="text" name="boardNm">
+        </dd>
+    </dl>
+    <input type="submit" value="등록하기">
+</form>
+<!-- 
+    1. 게시판 아이디 - notice, qna,
+    2. 게시판명 
+-->
+<div class="main_title">게시판 목록</div>
+    <form action="/admin/board" method="POST" target="ifrmHidden" autocomplete="off">
+    <table class="table_rows">
+    <thead>
+        <tr>
+            <th width="20">
+                <input type="checkbox" class="checkall" data-target-name="boardId">
+            </th>
+            <th>게시판 아이디</th>
+            <th>게시판 이름</th>
+            <th>설정</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in boardConfs %}
+        <tr>
+            <td align="center">
+                <input type="checkbox" name="boardId" value="{{ item.boardId }}">
+            </td>
+            <td>{{item.boardId}}</td>
+            <td>{{item.boardNm}}</td>
+            <td>
+                <a href="/admin/board/{{ item.boardId }}" class="btn1">설정하기</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="table-action">
+    <select name="mode">
+        <option value="update_list">수정</option>
+        <option value="delete_list">삭제</option>
+    </select>
+</div>
+<input type="submit" value="처리하기" class="btn2">
+</form>
+{% endblock %}

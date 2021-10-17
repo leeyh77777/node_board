@@ -1,0 +1,72 @@
+1.boot : 사이트 초기화
+-index.js : main menu , pageTitle, session.memiId가있으면 로그인처리
+
+2.config : 데이터베이스 설정
+-config.json : 데이터베이스 관련설정 json 파일
+
+3.lib : 라이브러리
+common.js
+- alert(메세지, 인스턴스, 음수이면 이전페이지 양수면 다음페이지)
+- go(이동할url, 인스턴스, 이동창(기본,부모))
+- reload(인스턴스, 이동창(기본,부모)) 
+-module.exports = commonLib;   ->  commonLib 로 require 가능
+logger.js
+
+
+4.logs : 로그 기록
+
+5.middlewares : 검증 관련 로직
+member.js
+- joinValidator(req, res, next) :회원가입 데이터 검증
+- loginValidator(req, res, next) : 로그인 검사
+-guestOnly(req, res, next) : 비회원 권한 검사
+-adminOnly(req, res, next) : 관리자 권한 검사
+
+6.models : sql 관련
+index.js : 상수 설정 후 module.exports= db;
+-const Sequelize : nodemodule 시퀄라이즈 설치 된거 리콰이어
+-const env : 설정 env설정 있으면 이엔브이 아니면 개발모드
+-const config : config 파일 리콰이어
+-cosnt sequelize = new Sequelize(config.database, config.username, config.password, config) :시퀄라이저생성
+-const db = { Sequelize, sequelize }; : 익스포트된 db에 시퀄라이저
+
+board.js
+-creat(boardId, boardNm) : 게시판 생성 
+-getBoards() : 게시판설정 목록 boardConf 테이블
+-getBoard(boardId) : 게시판 설정 조회 boardId로 확인
+-saveConfig : 게시판 설정 저장
+
+member.js
+join(data) : 회원가입 _ memPw 비크립트!!
+login(memId, memPw, req) : 로그인
+get(memId) : 회원정보 조회
+
+7.node_modules : 설치된 모듈
+
+8.public : app.use(express.static(path.join(__dirname, "public"))); _from app.js
+위 명령어로 인해 css나 js파일의 접근이 허용된다. *정적파일(css,js, image등)
+
+9.routers : uri 정의
+*admin : 관리자 페이지 라우터
+index.js :
+-route() : /board 라우팅
+-get() - 라우터등록  admin/board/main : 렌더링(data 페이지타이틀, 설정목록)
+-post() - 게시판아이디, 이름 생성시 부모창으로 새로고침
+
+-route("/board/:boardId") : 요청한 게시판아이디가 없으면 에러메세지후 뒤로가기 있으면 admin/board/config 렌더링)
+-post(req, res) : 요청한 게시판아이디 저장처리
+
+*main : 메인페이지 라우터
+index.js : / 라우팅
+-get() : main/index 렌더링
+
+10.views :nunjucks.configure(path.join(__dirname, "views") _from app.js
+위 명령어로 넌적스가 사용가능(html 파일만!!)
+
+.env: 설정
+
+.gitignore : git 업로드 제외 파일및 폴더
+
+app.js : 메인 설정 js 파일
+
+package.json : 노드 설정 json 파일

@@ -1,7 +1,7 @@
 {% extends '../outline/layout/main.html' %}
 {% block content %}
 <h1>회원 가입</h1>
-<form method="POST" action="member/join" target="ifrmHidden">
+<form method="POST" action="/member/join" target="ifrmHidden">
 <dl>
     <dt>아이디</dt>
     <dd>
@@ -17,13 +17,19 @@
 <dl>
     <dt>비밀번호</dt>
     <dd>
-        <input type="text" name="memPw">
+        <input type="password" name="memPw">
     </dd>
 </dl>
 <dl>
     <dt>비밀번호확인</dt>
     <dd>
-        <input type="text" name="memPwRe">
+        <input type="password" name="memPwRe">
+    </dd>
+</dl>
+<dl>
+    <dt>이메일</dt>
+    <dd>
+        <input type="email" name="email">
     </dd>
 </dl>
 <dl>
