@@ -3,6 +3,7 @@ const {
   Sequelize: { QueryTypes },
 } = require("./index");
 const logger = require("../lib/logger");
+const path = require();
 
 /**
  * 게시판 model
@@ -67,6 +68,21 @@ const board = {
         replacements: [boardId],
         type: QueryTypes.SELECT,
       });
+
+      const data = rows[0];
+      if (data) {
+        data.category = data.category ? data.category.split("||") : [];
+        data.categoryOrg = data.category.join("\r\n");
+      }
+
+      data.skin = data.skin || "default";
+
+      const skinPath = path.join(__dirname, "..", "views/board/skins/", data.skin);
+      data.listSkinPath = skinPath + "/_list.html";
+      data.viewSkinPath = skinPath + "/_view.html";
+      data.formSkinPath = skinPath + "/_form.html";
+
+      return data;
     } catch (err) {
       logger(err.message, "error");
       logger(err.stack, "error");
@@ -118,7 +134,7 @@ const board = {
                     WHERE boardId = :boardId`;
       await sequelize.query(sql, {
         replacements,
-        type : QueryTypes.UPDATE,
+        type: QueryTypes.UPDATE,
       });
       return true;
     } catch (err) {

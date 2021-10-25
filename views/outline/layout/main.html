@@ -12,13 +12,13 @@
 		{% block style %}
 		{% endblock %}
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="/js/layer.js"></script>
 		<script src="/js/common.js"></script>
 		{% if addScript.length > 0 %}
 		{% for script in addScript %}
 		<script src='/js/{{ script }}.js'></script>
 		{% endfor %}
 		{% endif %}
-		
 		{% block script %}
 		{% endblock %}
 		<title>{{ pageTitle }}</title>
@@ -29,22 +29,22 @@
 			{% include '../header/main.html' %}
 		</header>
 		{% endblock %}
-
+		
 		{% block mainMenu %}
 		{% include '../menus/main.html' %}
 		{% endblock %}
-
+		
 		<main>
 		{% block content %}
 		{% endblock %}
 		</main>
-
+		
 		{% block footer %}
 		<footer>
 			{% include '../footer/main.html' %}
 		</footer>
 		{% endblock %}
-
-		<iframe name="ifrmHidden" width="100%" height="500" src="" frameborder="0"></iframe>
+		
+		<iframe name='ifrmHidden' width='100%' height='500' frameborder='0'></iframe>
 	</body>
 </html>
